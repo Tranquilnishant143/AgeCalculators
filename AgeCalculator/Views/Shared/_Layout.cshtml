@@ -1,0 +1,155 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>@ViewData["Title"] - Age Calculator</title>
+
+    <link rel="stylesheet"
+          href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    <link rel="stylesheet"
+          href="~/css/site.css"
+          asp-append-version="true" />
+</head>
+
+<body>
+
+    <!-- HEADER -->
+
+    <div id="header">
+
+        <div class="header-container">
+
+            <div class="logo">
+
+                <a asp-controller="AgeCalculator"
+                   asp-action="Index">
+
+                    AgeCalculator
+
+                </a>
+
+            </div>
+
+            <div class="signin">
+
+                <a href="#">
+
+                    Sign In
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- TOP NAVIGATION -->
+
+    <div id="topnav">
+
+        <div class="nav-container">
+
+            <ul>
+
+                <li>
+
+                    <a href="#">
+
+                        Financial
+
+                    </a>
+
+                </li>
+
+                <li>
+
+                    <a href="#">
+
+                        Fitness &amp; Health
+
+                    </a>
+
+                </li>
+
+                <li>
+
+                    <a href="#">
+
+                        Math
+
+                    </a>
+
+                </li>
+
+                <li>
+
+                    <a class="active"
+                       asp-controller="AgeCalculator"
+                       asp-action="Index">
+
+                        Other
+
+                    </a>
+
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+    <!-- PAGE -->
+
+    <div id="page">
+
+        @RenderBody()
+
+    </div>
+
+    <!-- FOOTER -->
+
+    <div id="footer">
+
+        <div class="footer-container">
+
+            <div class="footer-links">
+
+                <a href="#">About Us</a>
+
+                |
+
+                <a href="#">Privacy Policy</a>
+
+                |
+
+                <a href="#">Terms</a>
+
+                |
+
+                <a href="#">Contact</a>
+
+            </div>
+
+            <div class="copyright">
+
+                © @DateTime.Now.Year Age Calculator
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+
+</body>
+</html>

@@ -1,0 +1,453 @@
+﻿@model AgeCalculator.Models.AgeCalculation
+
+@{
+    ViewData["Title"] = "Age Calculator";
+}
+
+<div class="breadcrumbs">
+    <a href="/">Home</a> /
+    <a href="#">Other</a> /
+    <span>Age Calculator</span>
+</div>
+
+<div class="page-wrapper">
+
+    <!-- LEFT CONTENT -->
+
+    <div class="content">
+
+        <h1 class="page-title">
+            Age Calculator
+        </h1>
+
+        <p class="page-description">
+            The Age Calculator can determine the age or interval between two
+            dates. The calculated age will be displayed in years, months,
+            weeks, days, hours, minutes, and seconds.
+        </p>
+
+        <div class="instruction-box">
+
+            <img src="~/images/info.png"
+                 class="info-icon"
+                 alt="Info" />
+
+            <span>
+                Modify the values and click the
+                <strong>Calculate</strong>
+                button to use.
+            </span>
+
+        </div>
+
+        <!-- CALCULATOR PANEL -->
+
+        <div class="calculator-box">
+
+            <form asp-action="Index" method="post">
+
+                <table class="calculator-table">
+
+                    <tr>
+
+                        <td class="left-title">
+                            Date of Birth
+                        </td>
+
+                        <td>
+
+                            <input asp-for="DateOfBirth"
+                                   type="date"
+                                   class="date-box" />
+
+                            <span asp-validation-for="DateOfBirth"
+                                  class="text-danger"></span>
+
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td class="left-title">
+                            Age at the Date of
+                        </td>
+
+                        <td>
+
+                            <input asp-for="AgeAtDate"
+                                   type="date"
+                                   class="date-box" />
+
+                            <span asp-validation-for="AgeAtDate"
+                                  class="text-danger"></span>
+
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td></td>
+
+                        <td>
+
+                            <button type="submit"
+                                    class="calculate-button">
+                                Calculate
+                            </button>
+
+                            <button type="reset"
+                                    class="clear-button">
+                                Clear
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+                </table>
+
+                <div asp-validation-summary="All"
+                     class="text-danger mt-2">
+                </div>
+
+            </form>
+
+        </div>
+
+        <!-- RESULT PANEL START -->
+        <!-- RESULT PANEL -->
+
+        <div class="result-panel">
+
+            <h3>Result</h3>
+
+            <table class="result-table">
+
+                <tr>
+                    <td><strong>Age</strong></td>
+                    <td>
+                        @if (Model.Years != 0 || Model.Months != 0 || Model.Days != 0)
+                        {
+                            @($"{Model.Years} Years {Model.Months} Months {Model.Days} Days")
+                        }
+                        else
+                        {
+                            <span>--</span>
+                        }
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Years</td>
+                    <td>@Model.Years</td>
+                </tr>
+
+                <tr>
+                    <td>Months</td>
+                    <td>@Model.Months</td>
+                </tr>
+
+                <tr>
+                    <td>Days</td>
+                    <td>@Model.TotalDays</td>
+                </tr>
+
+                <tr>
+                    <td>Weeks</td>
+                    <td>@Model.TotalWeeks</td>
+                </tr>
+
+                <tr>
+                    <td>Hours</td>
+                    <td>@Model.TotalHours</td>
+                </tr>
+
+                <tr>
+                    <td>Minutes</td>
+                    <td>@Model.TotalMinutes</td>
+                </tr>
+
+                <tr>
+                    <td>Seconds</td>
+                    <td>@Model.TotalSeconds</td>
+                </tr>
+
+                <tr>
+                    <td>Next Birthday</td>
+                    <td>
+                        @if (Model.NextBirthday.HasValue)
+                        {
+                            @Model.NextBirthday.Value.ToString("dd MMM yyyy")
+                        }
+                        else
+                        {
+                            <span>--</span>
+                        }
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Days Left</td>
+                    <td>
+                        @(Model.DaysLeft == 0
+                                                ? "--"
+                                                : $"{Model.DaysLeft} Days")
+                    </td>
+                </tr>
+
+            </table>
+
+        </div>
+
+        <!-- RELATED CALCULATORS -->
+
+        <fieldset class="related-box">
+
+            <legend>Related</legend>
+
+            <a href="#">Date Calculator</a>
+
+            <span>|</span>
+
+            <a href="#">Time Calculator</a>
+
+        </fieldset>
+
+        <!-- DESCRIPTION -->
+
+        <div class="content-description">
+
+            <h2>Age Calculator</h2>
+
+            <p>
+                The Age Calculator can determine the age or interval between
+                two dates. The calculated age is displayed in years,
+                months, weeks, days, hours, minutes and seconds.
+            </p>
+
+            <p>
+                This calculator follows the most commonly used age system
+                where a person's age increases on their birthday.
+            </p>
+
+            <p>
+                In some countries and cultures, age is calculated differently.
+                This calculator uses the international standard method.
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- RIGHT SIDEBAR START -->
+        <aside class="sidebar">
+
+        <!-- OTHER CALCULATORS -->
+
+        <div class="side-box">
+
+            <h3>Other Calculators</h3>
+
+            <ul>
+
+                <li><a href="#">Age Calculator</a></li>
+                <li><a href="#">Date Calculator</a></li>
+                <li><a href="#">Time Calculator</a></li>
+                <li><a href="#">Hours Calculator</a></li>
+                <li><a href="#">Grade Calculator</a></li>
+                <li><a href="#">GPA Calculator</a></li>
+                <li><a href="#">Height Calculator</a></li>
+                <li><a href="#">Password Generator</a></li>
+                <li><a href="#">Dice Roller</a></li>
+                <li><a href="#">Conversion Calculator</a></li>
+                <li><a href="#">IP Subnet Calculator</a></li>
+                <li><a href="#">Concrete Calculator</a></li>
+
+            </ul>
+
+        </div>
+
+        <!-- SEARCH -->
+
+        <div class="side-box">
+
+            <h3>Search</h3>
+
+            <div class="search-box">
+
+                <input type="text"
+                       class="search-input"
+                       placeholder="Search Calculator..." />
+
+                <button class="search-button">
+
+                    Search
+
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- ADVERTISEMENT -->
+
+        <div class="side-box">
+
+            <h3>Advertisement</h3>
+
+            <div class="ad-box">
+
+                300 × 250
+
+            </div>
+
+        </div>
+
+        <!-- POPULAR -->
+
+        <div class="side-box">
+
+            <h3>Popular Calculators</h3>
+
+            <ul>
+
+                <li><a href="#">BMI Calculator</a></li>
+                <li><a href="#">Percentage Calculator</a></li>
+                <li><a href="#">Loan Calculator</a></li>
+                <li><a href="#">Mortgage Calculator</a></li>
+                <li><a href="#">Scientific Calculator</a></li>
+                <li><a href="#">Salary Calculator</a></li>
+                <li><a href="#">Discount Calculator</a></li>
+                <li><a href="#">Random Number Generator</a></li>
+
+            </ul>
+
+        </div>
+
+    </aside>
+
+</div>
+
+<!-- INFORMATION -->
+
+<div class="bottom-content">
+
+    <h2>How Age is Calculated</h2>
+
+    <p>
+        Age is calculated as the difference between the selected Date of Birth
+        and the selected comparison date.
+    </p>
+
+    <p>
+        This calculator follows the standard international age calculation
+        method where age increases on a person's birthday.
+    </p>
+
+    <p>
+        Leap years are automatically considered while calculating age.
+    </p>
+
+</div>
+
+<!-- FOOTER LINKS -->
+
+<div class="footer-links-box">
+
+    <a href="#">Financial</a>
+
+    |
+
+    <a href="#">Fitness &amp; Health</a>
+
+    |
+
+    <a href="#">Math</a>
+
+    |
+
+    <a href="#">Other Calculators</a>
+
+</div>
+
+<!-- ARTICLE -->
+
+<section class="article-section">
+
+    <h2>About This Age Calculator</h2>
+
+    <p>
+        This calculator helps determine the exact age between two dates.
+    </p>
+
+    <p>
+        It displays Years, Months, Days, Weeks, Hours, Minutes and Seconds.
+    </p>
+
+    <h3>Features</h3>
+
+    <ul class="feature-list">
+
+        <li>✔ Exact Age Calculation</li>
+        <li>✔ Total Weeks</li>
+        <li>✔ Total Days</li>
+        <li>✔ Total Hours</li>
+        <li>✔ Total Minutes</li>
+        <li>✔ Total Seconds</li>
+        <li>✔ Next Birthday</li>
+        <li>✔ Days Left Until Birthday</li>
+
+    </ul>
+
+    <h3>Example</h3>
+
+    <table class="example-table">
+
+        <tr>
+
+            <th>Date of Birth</th>
+
+            <th>Age At</th>
+
+            <th>Result</th>
+
+        </tr>
+
+        <tr>
+
+            <td>01 Jan 2000</td>
+
+            <td>01 Jan 2026</td>
+
+            <td>26 Years</td>
+
+        </tr>
+
+        <tr>
+
+            <td>15 Aug 1998</td>
+
+            <td>15 Aug 2026</td>
+
+            <td>28 Years</td>
+
+        </tr>
+
+    </table>
+
+    <br />
+
+    <h3>Notes</h3>
+
+    <p>
+        Leap years are considered automatically.
+    </p>
+
+    <p>
+        Results are based on the Gregorian calendar.
+    </p>
+
+</section>
+
